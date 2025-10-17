@@ -1,5 +1,5 @@
 import React from 'react';
-import ACACalculator from './comp.js';
+import ACACalculator from './comp.jsx';
 
 function App() {
   return (
