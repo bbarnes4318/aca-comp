@@ -401,7 +401,7 @@ export default function ACACalculator() {
                   <div className="text-3xl font-bold">{formatCurrency(currentCalc.oep.oepTotal)}</div>
                 </div>
                 <div>
-                  <div className="text-sm opacity-90">Residuals ({residualMonths} months)</div>
+                  <div className="text-sm opacity-90">Residuals (60 months)</div>
                   <div className="text-3xl font-bold">{formatCurrency(currentCalc.cumulative - currentCalc.oep.oepTotal)}</div>
                 </div>
                 <div>
@@ -449,8 +449,8 @@ export default function ACACalculator() {
                     </tr>
                     <tr>
                       <td className="p-3 text-gray-700">Monthly Residual</td>
-                      <td className="p-3 text-right font-semibold">{formatCurrency(calculations.option1.residual.monthly)}</td>
-                      <td className="p-3 text-right font-semibold">{formatCurrency(calculations.option2.residual.monthly)}</td>
+                      <td className="p-3 text-right font-semibold">{formatCurrency(calculations.option1.yearlyResiduals[0].monthlyAmount)}</td>
+                      <td className="p-3 text-right font-semibold">{formatCurrency(calculations.option2.yearlyResiduals[0].monthlyAmount)}</td>
                       <td className="p-3 text-right font-semibold text-gray-600">Same</td>
                     </tr>
                   </tbody>
