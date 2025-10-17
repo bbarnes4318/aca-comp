@@ -1,10 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { Info, Settings, DollarSign, Calendar, TrendingUp, Users } from 'lucide-react';
 
-type CompOption = 'Hourly+Commission' | 'CommissionOnly';
-
 // Calculation utilities
-const calcDaily = (option: CompOption, appsPerDay: number, dailyHours: number) => {
+const calcDaily = (option, appsPerDay, dailyHours) => {
   if (option === 'Hourly+Commission') {
     const hourly = 10 * Math.max(dailyHours, 0);
     const commission = 10 * Math.max(appsPerDay - 5, 0);
@@ -15,7 +13,7 @@ const calcDaily = (option: CompOption, appsPerDay: number, dailyHours: number) =
   }
 };
 
-const calcOEP = (dailyTotal: number, appsPerDay: number, workingDays = 53) => {
+const calcOEP = (dailyTotal, appsPerDay, workingDays = 53) => {
   const totalApps = appsPerDay * workingDays;
   const oepTotal = dailyTotal * workingDays;
   return { totalApps, oepTotal };
@@ -46,7 +44,7 @@ const Tooltip = ({ children }: { children: React.ReactNode }) => (
 );
 
 export default function ACACalculator() {
-  const [compOption, setCompOption] = useState<CompOption>('Hourly+Commission');
+  const [compOption, setCompOption] = useState('Hourly+Commission');
   const [dailyHours, setDailyHours] = useState(8);
   const [appsPerDay, setAppsPerDay] = useState(5);
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -56,7 +54,7 @@ export default function ACACalculator() {
   const [compareMode, setCompareMode] = useState(false);
 
   const calculations = useMemo(() => {
-    const calc = (option: CompOption, hours: number) => {
+    const calc = (option, hours) => {
       const daily = calcDaily(option, appsPerDay, hours);
       const oep = calcOEP(daily.total, appsPerDay, workingDays);
       
