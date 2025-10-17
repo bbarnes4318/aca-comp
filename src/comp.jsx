@@ -5,7 +5,7 @@ import { Info, Settings, DollarSign, Calendar, TrendingUp, Users } from 'lucide-
 const calcDaily = (option, appsPerDay, dailyHours) => {
   if (option === 'Hourly+Commission') {
     const hourly = 10 * Math.max(dailyHours, 0);
-    const commission = 10 * Math.max(appsPerDay - 5, 0);
+    const commission = 10 * Math.max(appsPerDay - 5, 0); // $10 per app over 5 apps
     return { hourly, commission, total: hourly + commission };
   } else {
     const total = 15 * Math.max(appsPerDay, 0);
