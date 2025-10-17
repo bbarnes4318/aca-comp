@@ -100,12 +100,12 @@ export default function ACACalculator() {
   const currentCalc = compOption === 'Hourly+Commission' ? calculations.option1 : calculations.option2;
 
   const ResultCard = ({ icon: Icon, label, value, sublabel }: any) => (
-    <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-      <div className="flex items-center mb-2">
-        <Icon className="w-5 h-5 text-blue-600 mr-2" />
-        <h3 className="text-sm font-medium text-gray-600">{label}</h3>
+    <div className="bg-white rounded-lg shadow-md p-3 border border-gray-200">
+      <div className="flex items-center mb-1">
+        <Icon className="w-4 h-4 text-blue-600 mr-1" />
+        <h3 className="text-xs font-medium text-gray-600">{label}</h3>
       </div>
-      <div className="text-3xl font-bold text-gray-900">{value}</div>
+      <div className="text-lg font-bold text-gray-900">{value}</div>
       {sublabel && <div className="text-xs text-gray-500 mt-1">{sublabel}</div>}
     </div>
   );
@@ -135,17 +135,17 @@ export default function ACACalculator() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">ACA Agent Earnings Calculator</h1>
-          <p className="text-gray-600">Open Enrollment Period: November 1, 2025 – January 15, 2026</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 p-2">
+      <div className="max-w-7xl mx-auto">
+        <header className="text-center mb-3">
+          <h1 className="text-xl font-bold text-gray-900 mb-1">ACA Agent Earnings Calculator</h1>
+          <p className="text-xs text-gray-600">Open Enrollment Period: November 1, 2025 – January 15, 2026</p>
         </header>
 
         {/* Compensation Option Toggle */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">Compensation Model</h2>
+        <div className="bg-white rounded-lg shadow-md p-3 mb-3">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-sm font-semibold text-gray-800">Compensation Model</h2>
             <label className="flex items-center cursor-pointer">
               <span className="text-sm text-gray-600 mr-2">Compare Both</span>
               <div className="relative">
@@ -197,12 +197,13 @@ export default function ACACalculator() {
         </div>
 
         {/* Input Controls */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Your Daily Activity</h2>
+        <div className="bg-white rounded-lg shadow-md p-3 mb-3">
+          <h2 className="text-sm font-semibold text-gray-800 mb-2">Your Daily Activity</h2>
           
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {compOption === 'Hourly+Commission' && (
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">
                 Daily Hours Worked
               </label>
               <input
@@ -223,14 +224,14 @@ export default function ACACalculator() {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Approved Applications Per Day
+            <label className="block text-xs font-medium text-gray-700 mb-1">
+              Apps Per Day
               <Tooltip>Number of approved applications you expect to complete each working day during OEP.</Tooltip>
             </label>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => setAppsPerDay(Math.max(0, appsPerDay - 1))}
-                className="w-10 h-10 rounded-lg bg-gray-200 hover:bg-gray-300 font-bold text-xl"
+                className="w-8 h-8 rounded bg-gray-200 hover:bg-gray-300 font-bold text-sm"
               >
                 -
               </button>
@@ -240,11 +241,11 @@ export default function ACACalculator() {
                 max="100"
                 value={appsPerDay}
                 onChange={(e) => setAppsPerDay(Math.max(0, parseInt(e.target.value) || 0))}
-                className="flex-1 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg py-2"
+                className="flex-1 text-center text-lg font-bold border border-gray-300 rounded py-1"
               />
               <button
                 onClick={() => setAppsPerDay(appsPerDay + 1)}
-                className="w-10 h-10 rounded-lg bg-gray-200 hover:bg-gray-300 font-bold text-xl"
+                className="w-8 h-8 rounded bg-gray-200 hover:bg-gray-300 font-bold text-sm"
               >
                 +
               </button>
@@ -313,12 +314,13 @@ export default function ACACalculator() {
               </div>
             )}
           </div>
-        </div>
+          </div>
+          </div>
 
         {/* Results */}
         {!compareMode ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
               <ResultCard
                 icon={DollarSign}
                 label="Daily Pay"
@@ -348,20 +350,20 @@ export default function ACACalculator() {
             </div>
 
             {/* Residual Timeline */}
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">5-Year Residual Income Projection</h3>
-                <div className="text-sm text-gray-600 bg-blue-50 px-3 py-1 rounded-full">
-                  70% annual retention rate
+            <div className="bg-white rounded-lg shadow-md p-3 mb-3">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-semibold text-gray-800">5-Year Residual Income Projection</h3>
+                <div className="text-xs text-gray-600 bg-blue-50 px-2 py-1 rounded">
+                  70% retention
                 </div>
               </div>
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="text-xs text-gray-600 mb-2">
                 Projections assume 70% customer retention year-over-year. Each customer generates $2/month while their policy remains active.
               </p>
               
-              <div className="space-y-3">
+              <div className="space-y-1">
                 {currentCalc.yearlyResiduals.map((year) => (
-                  <div key={year.year} className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                  <div key={year.year} className="bg-gradient-to-r from-green-50 to-emerald-50 rounded p-2 border border-green-200">
                     <div className="flex justify-between items-center mb-2">
                       <div>
                         <div className="font-semibold text-gray-800">Year {year.year}</div>
@@ -393,20 +395,20 @@ export default function ACACalculator() {
             </div>
 
             {/* Summary */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-6 text-white">
-              <h3 className="text-xl font-semibold mb-4">Total Earnings Projection</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-3 text-white">
+              <h3 className="text-sm font-semibold mb-2">Total Earnings Projection</h3>
+              <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <div className="text-sm opacity-90">OEP Earnings</div>
-                  <div className="text-3xl font-bold">{formatCurrency(currentCalc.oep.oepTotal)}</div>
+                  <div className="text-xs opacity-90">OEP Earnings</div>
+                  <div className="text-lg font-bold">{formatCurrency(currentCalc.oep.oepTotal)}</div>
                 </div>
                 <div>
-                  <div className="text-sm opacity-90">Residuals (60 months)</div>
-                  <div className="text-3xl font-bold">{formatCurrency(currentCalc.cumulative - currentCalc.oep.oepTotal)}</div>
+                  <div className="text-xs opacity-90">Residuals (60 months)</div>
+                  <div className="text-lg font-bold">{formatCurrency(currentCalc.cumulative - currentCalc.oep.oepTotal)}</div>
                 </div>
                 <div>
-                  <div className="text-sm opacity-90">Total Projected</div>
-                  <div className="text-3xl font-bold">{formatCurrency(currentCalc.cumulative)}</div>
+                  <div className="text-xs opacity-90">Total Projected</div>
+                  <div className="text-lg font-bold">{formatCurrency(currentCalc.cumulative)}</div>
                 </div>
               </div>
             </div>
