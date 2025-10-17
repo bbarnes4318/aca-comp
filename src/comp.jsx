@@ -46,7 +46,7 @@ const Tooltip = ({ children }: { children: React.ReactNode }) => (
 export default function ACACalculator() {
   const [compOption, setCompOption] = useState('Hourly+Commission');
   const [dailyHours, setDailyHours] = useState(8);
-  const [appsPerDay, setAppsPerDay] = useState(5);
+  const [appsPerDay, setAppsPerDay] = useState(20);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [workingDays, setWorkingDays] = useState(53);
   const [persistencyRate] = useState(70); // Fixed at 70%
@@ -197,14 +197,14 @@ export default function ACACalculator() {
         </div>
 
         {/* Input Controls */}
-        <div className="bg-white rounded-lg shadow-md p-3 mb-3">
-          <h2 className="text-sm font-semibold text-gray-800 mb-2">Your Daily Activity</h2>
+        <div className="bg-white rounded-lg shadow-md p-3 mb-3 border-2 border-blue-200">
+          <h2 className="text-sm font-bold text-blue-800 mb-2">⚠️ ENTER YOUR DAILY ACTIVITY ⚠️</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {compOption === 'Hourly+Commission' && (
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">
-                Daily Hours Worked
+              <label className="block text-xs font-bold text-red-700 mb-1">
+                ⚠️ HOURS WORKED PER DAY ⚠️
               </label>
               <input
                 type="range"
@@ -224,8 +224,8 @@ export default function ACACalculator() {
           )}
 
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
-              Apps Per Day
+            <label className="block text-xs font-bold text-red-700 mb-1">
+              ⚠️ APPS PER DAY ⚠️
               <Tooltip>Number of approved applications you expect to complete each working day during OEP.</Tooltip>
             </label>
             <div className="flex items-center gap-2">
@@ -349,47 +349,16 @@ export default function ACACalculator() {
               />
             </div>
 
-            {/* Residual Timeline */}
-            <div className="bg-white rounded-lg shadow-md p-3 mb-3">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold text-gray-800">5-Year Residual Income Projection</h3>
-                <div className="text-xs text-gray-600 bg-blue-50 px-2 py-1 rounded">
-                  70% retention
+            {/* Residual Summary */}
+            <div className="bg-white rounded-lg shadow-md p-2 mb-3">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-xs font-semibold text-gray-800">5-Year Residuals (70% retention)</h3>
+                  <p className="text-xs text-gray-600">$2/month per customer</p>
                 </div>
-              </div>
-              <p className="text-xs text-gray-600 mb-2">
-                Projections assume 70% customer retention year-over-year. Each customer generates $2/month while their policy remains active.
-              </p>
-              
-              <div className="space-y-1">
-                {currentCalc.yearlyResiduals.map((year) => (
-                  <div key={year.year} className="bg-gradient-to-r from-green-50 to-emerald-50 rounded p-2 border border-green-200">
-                    <div className="flex justify-between items-center mb-2">
-                      <div>
-                        <div className="font-semibold text-gray-800">Year {year.year}</div>
-                        <div className="text-xs text-gray-600">
-                          {year.activeCustomers.toLocaleString()} active customers · {formatCurrency(year.monthlyAmount)}/month
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-green-700">{formatCurrency(year.yearTotal)}</div>
-                        <div className="text-xs text-gray-600">annual total</div>
-                      </div>
-                    </div>
-                    <div className="w-full bg-green-200 rounded-full h-2 mt-2">
-                      <div 
-                        className="bg-green-600 h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${(year.activeCustomers / currentCalc.oep.totalApps) * 100}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-4 p-4 bg-green-100 rounded-lg border-2 border-green-300">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-green-900">5-Year Total Residuals:</span>
-                  <span className="text-3xl font-bold text-green-900">{formatCurrency(currentCalc.totalResiduals)}</span>
+                <div className="text-right">
+                  <div className="text-lg font-bold text-green-600">{formatCurrency(currentCalc.totalResiduals)}</div>
+                  <div className="text-xs text-gray-500">Year 1: {formatCurrency(currentCalc.yearlyResiduals[0].monthlyAmount)}/month</div>
                 </div>
               </div>
             </div>
