@@ -172,7 +172,7 @@ export default function ACACalculator() {
                 }`}
               >
                 <div className="text-lg">Hourly + Commission</div>
-                <div className="text-xs opacity-90 mt-1">$10/hr + $10 per app (6+)</div>
+                <div className="text-xs opacity-90 mt-1">$12/hr + $10/app (6+)</div>
               </button>
               <button
                 onClick={() => setCompOption('CommissionOnly')}
