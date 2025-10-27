@@ -19,13 +19,13 @@ const calcOEP = (dailyTotal, appsPerDay, workingDays = 53) => {
   return { totalApps, oepTotal };
 };
 
-const calcResidual = (totalApps, persistencyRate = 100) => {
+const calcResidual = (totalApps: number, persistencyRate = 100) => {
   const baseMonthly = totalApps * 2;
   const monthly = baseMonthly * (persistencyRate / 100);
   return { monthly };
 };
 
-const formatCurrency = (value) => {
+const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -34,7 +34,7 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
-const Tooltip = ({ children }) => (
+const Tooltip = ({ children }: { children: React.ReactNode }) => (
   <div className="group relative inline-block ml-1">
     <Info className="w-4 h-4 text-gray-400 hover:text-gray-600 cursor-help" />
     <div className="invisible group-hover:visible absolute z-10 w-64 p-2 mt-1 text-sm text-white bg-gray-800 rounded-lg shadow-lg -left-28">
@@ -99,7 +99,7 @@ export default function ACACalculator() {
 
   const currentCalc = compOption === 'Hourly+Commission' ? calculations.option1 : calculations.option2;
 
-  const ResultCard = ({ icon: Icon, label, value, sublabel }) => (
+  const ResultCard = ({ icon: Icon, label, value, sublabel }: any) => (
     <div className="bg-white rounded-lg shadow-md p-3 border border-gray-200">
       <div className="flex items-center mb-1">
         <Icon className="w-4 h-4 text-perenroll-green mr-1" />
@@ -110,7 +110,7 @@ export default function ACACalculator() {
     </div>
   );
 
-  const ComparisonCard = ({ calc, title }) => (
+  const ComparisonCard = ({ calc, title }: any) => (
     <div className="flex-1 bg-white rounded-lg shadow-md p-6 border border-gray-200">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">{title}</h3>
       <div className="space-y-3">
