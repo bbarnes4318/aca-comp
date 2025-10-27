@@ -19,13 +19,13 @@ const calcOEP = (dailyTotal, appsPerDay, workingDays = 53) => {
   return { totalApps, oepTotal };
 };
 
-const calcResidual = (totalApps: number, persistencyRate = 100) => {
+const calcResidual = (totalApps, persistencyRate = 100) => {
   const baseMonthly = totalApps * 2;
   const monthly = baseMonthly * (persistencyRate / 100);
   return { monthly };
 };
 
-const formatCurrency = (value: number) => {
+const formatCurrency = (value) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -34,7 +34,7 @@ const formatCurrency = (value: number) => {
   }).format(value);
 };
 
-const Tooltip = ({ children }: { children: React.ReactNode }) => (
+const Tooltip = ({ children }) => (
   <div className="group relative inline-block ml-1">
     <Info className="w-4 h-4 text-gray-400 hover:text-gray-600 cursor-help" />
     <div className="invisible group-hover:visible absolute z-10 w-64 p-2 mt-1 text-sm text-white bg-gray-800 rounded-lg shadow-lg -left-28">
@@ -99,10 +99,10 @@ export default function ACACalculator() {
 
   const currentCalc = compOption === 'Hourly+Commission' ? calculations.option1 : calculations.option2;
 
-  const ResultCard = ({ icon: Icon, label, value, sublabel }: any) => (
+  const ResultCard = ({ icon: Icon, label, value, sublabel }) => (
     <div className="bg-white rounded-lg shadow-md p-3 border border-gray-200">
       <div className="flex items-center mb-1">
-        <Icon className="w-4 h-4 text-blue-600 mr-1" />
+        <Icon className="w-4 h-4 text-perenroll-green mr-1" />
         <h3 className="text-xs font-medium text-gray-600">{label}</h3>
       </div>
       <div className="text-lg font-bold text-gray-900">{value}</div>
@@ -110,7 +110,7 @@ export default function ACACalculator() {
     </div>
   );
 
-  const ComparisonCard = ({ calc, title }: any) => (
+  const ComparisonCard = ({ calc, title }) => (
     <div className="flex-1 bg-white rounded-lg shadow-md p-6 border border-gray-200">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">{title}</h3>
       <div className="space-y-3">
@@ -120,7 +120,7 @@ export default function ACACalculator() {
         </div>
         <div>
           <div className="text-sm text-gray-600">Total OEP Pay</div>
-          <div className="text-2xl font-bold text-blue-600">{formatCurrency(calc.oep.oepTotal)}</div>
+          <div className="text-2xl font-bold text-perenroll-green">{formatCurrency(calc.oep.oepTotal)}</div>
         </div>
         <div>
           <div className="text-sm text-gray-600">Year 1 Monthly Residual</div>
@@ -135,9 +135,16 @@ export default function ACACalculator() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 p-2">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-gray-100 p-2">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-3">
+          <div className="flex justify-center mb-2">
+            <img 
+              src="/perenroll.png" 
+              alt="PerEnroll Logo" 
+              className="h-12 w-auto"
+            />
+          </div>
           <h1 className="text-xl font-bold text-gray-900 mb-1">ACA Agent Earnings Calculator</h1>
           <p className="text-xs text-gray-600">Open Enrollment Period: November 1, 2025 – January 15, 2026</p>
         </header>
@@ -155,7 +162,7 @@ export default function ACACalculator() {
                   checked={compareMode}
                   onChange={(e) => setCompareMode(e.target.checked)}
                 />
-                <div className={`w-10 h-6 rounded-full transition ${compareMode ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
+                <div className={`w-10 h-6 rounded-full transition ${compareMode ? 'bg-perenroll-green' : 'bg-gray-300'}`}></div>
                 <div className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition transform ${compareMode ? 'translate-x-4' : ''}`}></div>
               </div>
             </label>
@@ -167,7 +174,7 @@ export default function ACACalculator() {
                 onClick={() => setCompOption('Hourly+Commission')}
                 className={`flex-1 py-3 px-4 rounded-lg font-medium transition ${
                   compOption === 'Hourly+Commission'
-                    ? 'bg-blue-600 text-white shadow-lg'
+                    ? 'bg-perenroll-green text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -178,7 +185,7 @@ export default function ACACalculator() {
                 onClick={() => setCompOption('CommissionOnly')}
                 className={`flex-1 py-3 px-4 rounded-lg font-medium transition ${
                   compOption === 'CommissionOnly'
-                    ? 'bg-blue-600 text-white shadow-lg'
+                    ? 'bg-perenroll-green text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -189,7 +196,7 @@ export default function ACACalculator() {
           )}
           
           {compOption === 'Hourly+Commission' && (
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-800 flex items-start">
+            <div className="mt-4 p-3 bg-green-50 rounded-lg text-sm text-perenroll-green flex items-start">
               <Info className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
               <span>Commission starts at the 6th approved application each day. Apps 1-5 earn hourly pay only.</span>
             </div>
@@ -197,8 +204,8 @@ export default function ACACalculator() {
         </div>
 
         {/* Input Controls */}
-        <div className="bg-white rounded-lg shadow-md p-3 mb-3 border-2 border-blue-200">
-          <h2 className="text-sm font-bold text-blue-800 mb-2">⚠️ ENTER YOUR DAILY ACTIVITY ⚠️</h2>
+        <div className="bg-white rounded-lg shadow-md p-3 mb-3 border-2 border-perenroll-green">
+          <h2 className="text-sm font-bold text-perenroll-green mb-2">⚠️ ENTER YOUR DAILY ACTIVITY ⚠️</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {compOption === 'Hourly+Commission' && (
@@ -217,7 +224,7 @@ export default function ACACalculator() {
               />
               <div className="flex justify-between text-sm text-gray-600 mt-1">
                 <span>0 hrs</span>
-                <span className="font-semibold text-blue-600">{dailyHours} hours</span>
+                <span className="font-semibold text-perenroll-green">{dailyHours} hours</span>
                 <span>16 hrs</span>
               </div>
             </div>
@@ -259,7 +266,7 @@ export default function ACACalculator() {
           <div className="mt-6">
             <button
               onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-700"
+              className="flex items-center text-sm font-medium text-perenroll-green hover:text-perenroll-green-dark"
             >
               <Settings className="w-4 h-4 mr-1" />
               {showAdvanced ? 'Hide' : 'Show'} Advanced Settings
@@ -364,7 +371,7 @@ export default function ACACalculator() {
             </div>
 
             {/* Summary */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-3 text-white">
+            <div className="bg-gradient-to-r from-perenroll-green to-perenroll-green-dark rounded-lg shadow-lg p-3 text-white">
               <h3 className="text-sm font-semibold mb-2">Total Earnings Projection</h3>
               <div className="grid grid-cols-3 gap-2">
                 <div>
